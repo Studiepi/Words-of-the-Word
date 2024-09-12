@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search in the Bible</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        .results { margin-top: 20px; }
+        .result-item { margin-bottom: 15px; }
+        .reference { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search the Bible</h1>
+        <form action="/search" method="post">
+            <input type="text" name="word" placeholder="Enter word to search" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if results %}
+            <div class="results">
+                <h2>Results for "{{ word }}"</h2>
+                {% for result in results %}
+                    <div class="result-item">
+                        <div class="reference">{{ result.reference }}</div>
+                        <div class="text">{{ result.text }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif word %}
+            <p>No results found for "{{ word }}"</p>
+        {% endif %}
+    </div>
+</body>
+</html>
