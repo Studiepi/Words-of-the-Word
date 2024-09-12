@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Search in the Bible</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { width: 80%; margin: 0 auto; }
-        .results { margin-top: 20px; }
-        .result-item { margin-bottom: 15px; }
-        .reference { font-weight: bold; }
-    </style>
+    <title>Word in the Bible</title>
+    <script>
+        // Function to send the search term to the server and get the count of occurrences
+        function updateWordCount() {
+            const word = document.getElementById('word').value;
+
+            // Send the word to the backend using fetch
+            fetch('/count', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ word: word }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const countDisplay = document.getElementById('count');
+                
+                if (word.length === 1) {
+                    // If it's a single letter
+                    countDisplay.innerText = `The letter "${word}" appears ${data.count} times in the KJV Bible.`;
+                } else if (word.length > 1) {
+                    // If it's a word or phrase
+                    countDisplay.innerText = `The word/phrase "${word}" appears ${data.count} times in the KJV Bible.`;
+                } else {
+                    // If no word is typed
+                    countDisplay.innerText = `Occurrences: 0`;
+                }
+            });
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Search the Bible</h1>
-        <form action="/search" method="post">
-            <input type="text" name="word" placeholder="Enter word to search" required>
-            <button type="submit">Search</button>
-        </form>
-
-        {% if results %}
-            <div class="results">
-                <h2>Results for "{{ word }}"</h2>
-                {% for result in results %}
-                    <div class="result-item">
-                        <div class="reference">{{ result.reference }}</div>
-                        <div class="text">{{ result.text }}</div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% elif word %}
-            <p>No results found for "{{ word }}"</p>
-        {% endif %}
-    </div>
+    <h1>Search the Bible</h1>
+    <form action="/search" method="POST">
+        <label for="word">Enter a word/phrase:</label>
+        <input type="text" id="word" name="word" placeholder="Word/Phrase" onkeyup="updateWordCount()" required>
+        <p id="count">The amount of times the word/letter appears will be displayed here.</p>
+        <button type="submit">See all verses containing this word/phrase</button>
+    </form>
 </body>
 </html>
