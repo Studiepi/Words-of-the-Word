@@ -3,45 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word in the Bible</title>
-    <script>
-        // Function to send the search term to the server and get the count of occurrences
-        function updateWordCount() {
-            const word = document.getElementById('word').value;
-
-            // Send the word to the backend using fetch
-            fetch('/count', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ word: word }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                const countDisplay = document.getElementById('count');
-                
-                if (word.length === 1) {
-                    // If it's a single letter
-                    countDisplay.innerText = `The letter "${word}" appears ${data.count} times in the KJV Bible.`;
-                } else if (word.length > 1) {
-                    // If it's a word or phrase
-                    countDisplay.innerText = `The word/phrase "${word}" appears ${data.count} times in the KJV Bible.`;
-                } else {
-                    // If no word is typed
-                    countDisplay.innerText = `Occurrences: 0`;
-                }
-            });
-        }
-    </script>
+    <title>Bible Search</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Search the Bible</h1>
+    <h1>Bible Search</h1>
     <form action="/search" method="POST">
-        <label for="word">Enter a word/phrase:</label>
-        <input type="text" id="word" name="word" placeholder="Word/Phrase" onkeyup="updateWordCount()" required>
-        <p id="count">The amount of times the word/letter appears will be displayed here.</p>
-        <button type="submit">See all verses containing this word/phrase</button>
+        <label for="word">Enter a word:</label>
+        <input type="text" id="word" name="word" placeholder="Search for a word/phrase" onkeyup="updateWordCount()" required>
+
+        <!-- Checkbox for exact/partial match -->
+        <label for="partialMatch">
+            <input type="checkbox" id="partialMatch" name="partialMatch" onclick="updateWordCount()">
+            Allow partial matches
+        </label>
+
+        <p id="count">Number of occurrences will be displayed here</p>
+        <button type="submit">Search</button>
     </form>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
