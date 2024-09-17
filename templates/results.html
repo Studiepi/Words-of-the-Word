@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Search Results for "{{ word }}"</h1>
+    <div class="container">
+        <h1>Search Results</h1>
 
-    {% if results %}
-        <ul>
+        <!-- Display number of occurrences and user input -->
+        <p id="result-summary">Showing {{ occurrences }} results for "{{ word }}"</p>
+
+        <!-- Container for the results -->
+        <div id="results-container">
             {% for result in results %}
-                <li>
-                    <strong>{{ result.reference }}</strong>: {{ result.text }}
-                </li>
+            <div class="verse-card">
+                <p><strong>{{ result.book }} {{ result.chapter }}:{{ result.verse_number }}</strong></p>
+                <p>{{ result.text }}</p>
+            </div>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No results found for "{{ word }}".</p>
-    {% endif %}
-
-    <a href="/">Go back to search</a>
+        </div>
+    </div>
 </body>
 </html>

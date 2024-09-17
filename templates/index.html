@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bible Search</title>
-    <!-- Link to external stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Search the Bible</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/scripts.js"></script>
 </head>
 <body>
-    <h1>Bible Search</h1>
-    <form action="/search" method="POST">
-        <label for="word">Enter a word:</label>
-        <input type="text" id="word" name="word" placeholder="Search for a word/phrase" onkeyup="updateWordCount()" required>
+    <header>
+        <h1>Search the Bible</h1>
+    </header>
 
-        <!-- Checkbox for exact/partial match -->
-        <label for="partialMatch">
-            <input type="checkbox" id="partialMatch" name="partialMatch" onclick="updateWordCount()">
-            Allow partial matches
-        </label>
+    <main>
+        <form action="/search" method="POST">
+            <input type="text" id="word" name="word" placeholder="Type a word or phrase..." onkeyup="updateWordCount()" required>
 
-        <p id="count">Number of occurrences will be displayed here</p>
-        <button type="submit">Search</button>
-    </form>
-
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+            <p id="count">Number of occurrences will be displayed here</p>
+            
+            <!-- Checkbox to toggle exact or partial match -->
+            <label for="partialMatch">
+                <input type="checkbox" id="partialMatch" name="partialMatch" checked onclick="updateWordCount()"> Allow partial matches
+            </label>
+            <button type="submit">Search</button>
+        </form>
+    </main>
 </body>
 </html>
