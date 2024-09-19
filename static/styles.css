@@ -1,155 +1,91 @@
-/* General reset */
-* {
+/* General page styling */
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1e1e1e; /* Dark grey background */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    color: #f4f4f4; /* Light text */
-    overflow-y: auto;
-}
-
-/* Title Styling */
-h1 {
-    font-size: 4rem; /* Large, centralized title */
-    font-weight: bold;
     text-align: center;
-    margin-bottom: 60px; /* Space between title and search bar */
-    color: #f4f4f4; /* Light text for contrast */
 }
 
-/* Main Styling */
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Styling for the main page (index.html) */
+h1 {
+    font-size: 48px;
+    margin-top: 50px;
 }
 
-/* Form Styling */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: inline-block;
+    margin-top: 20px;
+    text-align: left;
 }
 
 input[type="text"] {
-    width: 80%; /* Wide search bar */
-    padding: 20px;
-    font-size: 2rem;
+    width: 500px;
+    padding: 15px;
     border-radius: 30px;
-    border: 2px solid #444; /* Medium grey border */
-    margin-bottom: 20px;
-    background-color: #333; /* Dark grey input background */
-    color: white;
-}
-
-input[type="text"]::placeholder {
-    color: #888;
-    font-size: 1.5rem;
-}
-
-/* Display count below search bar */
-p#count {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #bbb; /* Light grey for count */
-}
-
-/* Checkbox Styling */
-label {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    color: #ddd; /* Lighter grey */
+    border: none;
+    font-size: 18px;
+    outline: none;
 }
 
 input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.5); /* Larger checkbox */
+    margin-left: 10px;
 }
 
-/* Button Styling */
 button {
-    padding: 20px 40px;
-    font-size: 1.5rem;
-    background-color: #444; /* Medium grey button */
-    color: white;
+    margin-top: 20px;
+    padding: 10px 20px;
     border: none;
     border-radius: 30px;
+    background-color: #555;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #555; /* Slightly lighter grey on hover */
+    background-color: #777;
 }
 
-/* Styling for the search results summary */
-#result-summary {
-    font-size: 1.5rem;
-    color: #f4f4f4;
-    text-align: center;
-    margin-bottom: 20px;
+p {
+    margin-top: 10px;
+    font-size: 18px;
 }
 
-
-
-
-
-
-
-
-/* Container for all content to center and space it */
-.container {
-    width: 80%;
-    max-width: 900px; /* Maximum width for larger screens */
-    margin: 0 auto; /* Center horizontally */
-    padding: 20px;
-}
-
-/* Styling for the search results summary */
-#result-summary {
-    font-size: 1.5rem;
-    color: #f4f4f4;
-    margin-bottom: 20px; /* Space below the summary */
-}
-
-/* Styling for the results container */
-#results-container {
+/* Styling for the results page (results.html) */
+.results-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Styling for each verse card */
-.verse-card {
-    background-color: #2a2a2a; /* Dark grey background for each card */
-    border-radius: 15px; /* Rounded corners */
     padding: 20px;
-    margin: 10px 0; /* Space between cards */
-    width: 100%;
-    max-width: 800px;
-    color: #f4f4f4; /* Light text for readability */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    text-align: left; /* Ensure text starts from the left side */
+    max-height: 80vh; /* Adjusted to fit within the viewport */
+    overflow-y: auto; /* Allows scrolling within results container */
 }
 
-/* Text inside verse card */
-.verse-card p {
-    margin: 10px 0;
+.results-container h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
-/* Styling for book and verse number */
-.verse-card strong {
-    color: #ddd; /* Lighter color for book and verse reference */
+.verse {
+    width: 60%;
+    background-color: #444;
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 18px;
+}
+
+strong {
+    font-weight: bold;
+    color: #ffd700; /* Highlight the bold words in gold */
+}
+
+/* Ensure the page content is scrollable as needed */
+html, body {
+    overflow: auto;
 }

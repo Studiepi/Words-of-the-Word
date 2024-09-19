@@ -7,21 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Search Results</h1>
-
-        <!-- Display number of occurrences and user input -->
-        <p id="result-summary">Showing {{ occurrences }} results for "{{ word }}"</p>
-
-        <!-- Container for the results -->
-        <div id="results-container">
+    <div class="results-container">
+        <h2>Showing {{ count }} results for "{{ word }}"</h2>
+        
+        {% if results %}
             {% for result in results %}
-            <div class="verse-card">
-                <p><strong>{{ result.book }} {{ result.chapter }}:{{ result.verse_number }}</strong></p>
-                <p>{{ result.text }}</p>
-            </div>
+                <div class="verse">
+                    <p>{{ result.book }} {{ result.chapter }}:{{ result.verse }} - {{ result.text | safe }}</p>
+                </div>
             {% endfor %}
-        </div>
+        {% else %}
+            <p>No results found for "{{ word }}"</p>
+        {% endif %}
     </div>
 </body>
 </html>
