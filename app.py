@@ -18,29 +18,31 @@ def highlight_word_in_verse(verse, word):
     highlighted_verse = re.sub(f'({escaped_word})', r'<strong>\1</strong>', verse, flags=re.IGNORECASE)
     return highlighted_verse
 
-# Function to search for the word in the Bible and return matching verses
 def search_bible(bible, word, partial_match=False):
     word_lower = word.lower()
     results = []
     for book in bible:
+        full_book_name = book['name']  # Use the full book name from the JSON
         for chapter_number, chapter in enumerate(book['chapters'], 1):
             for verse_number, verse in enumerate(chapter, 1):
                 verse_lower = verse.lower()
                 if partial_match:
                     if word_lower in verse_lower:
+                        highlighted_verse = highlight_word_in_verse(verse, word)  # Highlight the word
                         results.append({
-                            'book': book['abbrev'],
+                            'book': full_book_name,
                             'chapter': chapter_number,
                             'verse': verse_number,
-                            'text': highlight_word_in_verse(verse, word)
+                            'text': highlighted_verse  # Store highlighted verse
                         })
                 else:
                     if re.search(rf'\b{re.escape(word_lower)}\b', verse_lower):
+                        highlighted_verse = highlight_word_in_verse(verse, word)  # Highlight the word
                         results.append({
-                            'book': book['abbrev'],
+                            'book': full_book_name,
                             'chapter': chapter_number,
                             'verse': verse_number,
-                            'text': highlight_word_in_verse(verse, word)
+                            'text': highlighted_verse  # Store highlighted verse
                         })
     return results
 

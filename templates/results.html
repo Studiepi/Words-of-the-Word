@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="results-container">
+    <div class="sticky-header">
         <h2>Showing {{ count }} results for "{{ word }}"</h2>
-        
-        {% if results %}
-            {% for result in results %}
-                <div class="verse">
-                    <p>{{ result.book }} {{ result.chapter }}:{{ result.verse }} - {{ result.text | safe }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
+    </div>
+    
+    <div class="results-container">
+        {% for result in results %}
+            <div class="verse">
+                <p><strong>{{ result.book }} {{ result.chapter }}:{{ result.verse }}</strong></p>
+                <p>{{ result.text | safe }}</p>
+            </div>
+        {% endfor %}
+
+        {% if not results %}
             <p>No results found for "{{ word }}"</p>
         {% endif %}
     </div>
