@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search the Bible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
-    <script src="/static/scripts.js" defer></script> <!-- Use defer to ensure scripts run after HTML is loaded -->
+    <script src="/static/scripts.js" defer></script>
 </head>
 <body>
     <header>
@@ -14,15 +15,16 @@
 
     <main>
         <form action="/search" method="POST">
-            <input type="text" id="word" name="word" placeholder="Type a word or phrase..." onkeyup="updateWordCount()" required aria-label="Search word or phrase">
+            <div class="search-container">
+                <input type="text" id="word" name="word" placeholder="Type a word or phrase..." onkeyup="updateWordCount()" required aria-label="Search word or phrase">
+                <button type="submit" class="search-button" aria-label="Search">Search</button>
+            </div>
 
             <p id="count">Number of occurrences will be displayed here</p>
             
-            <!-- Checkbox to toggle exact or partial match -->
             <label for="partialMatch">
                 <input type="checkbox" id="partialMatch" name="partialMatch" checked onclick="updateWordCount()" aria-label="Allow partial matches"> Allow partial matches
             </label>
-            <button type="submit">Search</button>
         </form>
     </main>
 </body>
